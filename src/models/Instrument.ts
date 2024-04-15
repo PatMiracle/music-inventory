@@ -1,6 +1,6 @@
 import { Schema, Model, SchemaTypes, Types } from "mongoose";
 
-interface InstrumentI{
+export interface InstrumentI{
     name: string
     description: string
     img: string
