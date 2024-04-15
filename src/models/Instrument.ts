@@ -2,17 +2,17 @@ import { Schema, Model, SchemaTypes, Types } from "mongoose";
 
 export interface InstrumentI{
     name: string
-    description: string
+    description?: string
     img: string
     category: Types.ObjectId
-    brand: Types.ObjectId
+    brand?: Types.ObjectId
     price: number
     stock: number
 }
 
 const InstrumentSchema = new Schema<InstrumentI>({
   name: { type: String, maxLength: 20, required: true },
-  description: { type: String, required: true },
+  description: { type: String },
   img: { type: String, required: true },
   category: {
     type: SchemaTypes.ObjectId,
