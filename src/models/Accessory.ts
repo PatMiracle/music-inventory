@@ -5,7 +5,7 @@ interface AccessoryI{
     name: string
     description?: string
     img: string
-    related_instruments?: [InstrumentI]
+    related_instruments?: InstrumentI[]
     brand?: Types.ObjectId
     features?: string[]
     price: number
