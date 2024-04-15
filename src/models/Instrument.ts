@@ -6,6 +6,7 @@ export interface InstrumentI{
     img: string
     category: Types.ObjectId
     brand?: Types.ObjectId
+    features? : string[]
     price: number
     stock: number
 }
@@ -21,6 +22,7 @@ const InstrumentSchema = new Schema<InstrumentI>({
     required: true,
   },
   brand: { type: SchemaTypes.ObjectId, ref: "Brand" },
+  features:[String],
   price: { type: Number, required: true, max: 1000 },
   stock: { type: Number, required: true },
 });
