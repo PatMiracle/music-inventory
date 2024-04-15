@@ -1,4 +1,4 @@
-import { Schema, Model, SchemaTypes, Types } from "mongoose";
+import { Schema, model, SchemaTypes, Types } from "mongoose";
 
 export interface InstrumentI{
     name: string
@@ -27,4 +27,4 @@ const InstrumentSchema = new Schema<InstrumentI>({
   stock: { type: Number, required: true },
 });
 
-export default Model.create<InstrumentI>("Instrument", InstrumentSchema);
+export default model<InstrumentI>("Instrument", InstrumentSchema);

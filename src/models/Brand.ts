@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 interface IBrand{
     name: string
@@ -10,6 +10,6 @@ const BrandSchema = new Schema<IBrand>({
   logo: { type: String },
 });
 
-const Brand = Model.create<IBrand>("Brand", BrandSchema);
+const Brand = model<IBrand>("Brand", BrandSchema);
 
 export default Brand

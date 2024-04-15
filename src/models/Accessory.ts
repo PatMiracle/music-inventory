@@ -1,4 +1,4 @@
-import { Schema, Model, SchemaTypes, Types } from "mongoose";
+import { Schema, SchemaTypes, Types, model } from "mongoose";
 import Instrument, {InstrumentI} from "./Instrument";
 
 interface AccessoryI{
@@ -23,4 +23,4 @@ const AccessorySchema = new Schema<AccessoryI>({
   stock: { type: Number, required: true },
 });
 
-export default Model.create<AccessoryI>("Accessory", AccessorySchema);
+export default model<AccessoryI>("Accessory", AccessorySchema);

@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 interface ICategory{
     name: string
@@ -12,4 +12,4 @@ const CategorySchema = new Schema<ICategory>({
   cover_img: { type: String, required: true, unique: true },
 });
 
-export default Model.create<ICategory>("Category", CategorySchema);
+export default model<ICategory>("Category", CategorySchema);
