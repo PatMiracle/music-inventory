@@ -23,4 +23,4 @@ const AccessorySchema = new Schema<AccessoryI>({
   stock: { type: Number, required: true },
 });
 
-export default Model.create("Accessory", AccessorySchema);
+export default Model.create<AccessoryI>("Accessory", AccessorySchema);

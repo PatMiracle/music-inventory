@@ -10,6 +10,6 @@ const BrandSchema = new Schema<IBrand>({
   logo: { type: String },
 });
 
-const Brand = Model.create("Brand", BrandSchema);
+const Brand = Model.create<IBrand>("Brand", BrandSchema);
 
 export default Brand

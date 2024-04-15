@@ -27,4 +27,4 @@ const InstrumentSchema = new Schema<InstrumentI>({
   stock: { type: Number, required: true },
 });
 
-export default Model.create("Instrument", InstrumentSchema);
+export default Model.create<InstrumentI>("Instrument", InstrumentSchema);

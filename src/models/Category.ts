@@ -12,4 +12,4 @@ const CategorySchema = new Schema<ICategory>({
   cover_img: { type: String, required: true, unique: true },
 });
 
-export default Model.create("Category", CategorySchema);
+export default Model.create<ICategory>("Category", CategorySchema);
