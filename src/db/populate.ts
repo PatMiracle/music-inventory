@@ -20,6 +20,7 @@ async function populate() {
   await createBrands();
   await createCategories();
   await createInstruments();
+  await createAccessories();
 }
 
 async function brandCreate(i: number, obj: IBrand) {
@@ -185,6 +186,26 @@ async function createInstruments() {
   ]);
 }
 
-// async function createAccessories(params:type) {
-
-// }
+async function createAccessories() {
+  console.log("Adding accessories");
+  await Promise.all([
+    accessoryCreate(0, {
+      name: "Music Stand",
+      description:
+        "A stand that holds your sheet music in place so you can read it easily while you play.",
+      img: "https://images.unsplash.com/photo-1613142659418-718b2ae6940d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjBzdGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+      price: 10,
+      stock: 50,
+      related_instruments: [instruments[3], instruments[4]],
+    }),
+    accessoryCreate(0, {
+      name: "Reeds",
+      description:
+        "Thin pieces of cane or synthetic material that vibrate to produce sound in a single-reed instrument. Reeds need to be replaced regularly as they become worn.",
+      img: "https://media.istockphoto.com/id/1310484587/photo/saxophone-or-clarinet-mouthpiece-with-replacement-reeds-and-gold-clamp.webp?b=1&s=170667a&w=0&k=20&c=6dLQDV_w9STdI-Rx2PQuIuyeTfx8o03TfVxgYhuXZ1E=",
+      related_instruments: [instruments[4]],
+      price: 10,
+      stock: 100,
+    }),
+  ]);
+}
