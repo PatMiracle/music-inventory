@@ -1,5 +1,3 @@
-#! /usr/bin/env node
-
 import connectDb from "./connect";
 
 import Instrument, { InstrumentI } from "../models/Instrument";
