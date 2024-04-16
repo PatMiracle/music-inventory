@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import connectDb from "./connect";
 
 import Instrument, { InstrumentI } from "../models/Instrument";
@@ -18,6 +19,8 @@ async function populate() {
   await createCategories();
   await createInstruments();
   await createAccessories();
+  console.log("Debug: Closing mongoose");
+  mongoose.connection.close();
 }
 
 async function brandCreate(i: number, obj: IBrand) {
@@ -91,6 +94,8 @@ async function accessoryCreate(i: number, obj: AccessoryI) {
 
   const accessory = new Accessory(accessoryDetail);
   await accessory.save();
+
+  accessories[i] = accessory;
   console.log(`Added accessory: ${obj.name}`);
 }
 
