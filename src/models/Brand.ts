@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-interface IBrand{
+export interface IBrand{
     name: string
     logo?: string
 }

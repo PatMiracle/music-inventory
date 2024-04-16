@@ -1,9 +1,9 @@
 import { Schema, model } from "mongoose";
 
-interface ICategory{
-    name: string
-    description: string,
-    cover_img: string
+export interface ICategory {
+  name: string;
+  description: string;
+  cover_img: string;
 }
 
 const CategorySchema = new Schema<ICategory>({
