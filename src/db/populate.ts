@@ -12,7 +12,6 @@ const categories: ICategory[] = [];
 const instruments: InstrumentI[] = [];
 const accessories: AccessoryI[] = [];
 
-populate().catch((e) => console.log(e));
 async function populate() {
   console.log("Debug: About to connect");
   await connectDb();
@@ -91,6 +90,10 @@ async function accessoryCreate(i: number, obj: AccessoryI) {
   if (obj.features) {
     accessoryDetail.features = obj.features;
   }
+
+  const accessory = new Accessory(accessoryDetail);
+  await accessory.save();
+  console.log(`Added accessory: ${obj.name}`);
 }
 
 async function createBrands() {
@@ -209,3 +212,5 @@ async function createAccessories() {
     }),
   ]);
 }
+
+export default populate;
