@@ -14,7 +14,7 @@ export interface InstrumentI {
 }
 
 const InstrumentSchema = new Schema<InstrumentI>({
-  name: { type: String, maxLength: 20, required: true },
+  name: { type: String, required: true },
   description: { type: String },
   img: { type: String, required: true },
   category: {
