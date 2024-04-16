@@ -1,15 +1,16 @@
-import { Schema, SchemaTypes, Types, model } from "mongoose";
-import Instrument, {InstrumentI} from "./Instrument";
+import { Schema, Types, model } from "mongoose";
+import Instrument, { InstrumentI } from "./Instrument";
+import { IBrand } from "./Brand";
 
-interface AccessoryI{
-    name: string
-    description?: string
-    img: string
-    related_instruments?: InstrumentI[]
-    brand?: Types.ObjectId
-    features?: string[]
-    price: number
-    stock: number
+export interface AccessoryI {
+  name: string;
+  description?: string;
+  img: string;
+  related_instruments?: InstrumentI[];
+  brand?: Types.ObjectId | IBrand;
+  features?: string[];
+  price: number;
+  stock: number;
 }
 
 const AccessorySchema = new Schema<AccessoryI>({
@@ -17,7 +18,7 @@ const AccessorySchema = new Schema<AccessoryI>({
   description: { type: String, required: true },
   img: { type: String, required: true },
   related_instruments: [Instrument],
-  brand: { type: SchemaTypes.ObjectId, ref: "Brand" },
+  brand: { type: Schema.Types.ObjectId, ref: "Brand" },
   features: [String],
   price: { type: Number, required: true, max: 1000 },
   stock: { type: Number, required: true },

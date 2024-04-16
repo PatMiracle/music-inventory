@@ -1,14 +1,16 @@
-import { Schema, model, SchemaTypes, Types } from "mongoose";
+import { Schema, model, Types } from "mongoose";
+import { ICategory } from "./Category";
+import { IBrand } from "./Brand";
 
-export interface InstrumentI{
-    name: string
-    description?: string
-    img: string
-    category: Types.ObjectId
-    brand?: Types.ObjectId
-    features? : string[]
-    price: number
-    stock: number
+export interface InstrumentI {
+  name: string;
+  description?: string;
+  img: string;
+  category: Types.ObjectId | ICategory;
+  brand?: Types.ObjectId | IBrand;
+  features?: string[];
+  price: number;
+  stock: number;
 }
 
 const InstrumentSchema = new Schema<InstrumentI>({
@@ -16,13 +18,13 @@ const InstrumentSchema = new Schema<InstrumentI>({
   description: { type: String },
   img: { type: String, required: true },
   category: {
-    type: SchemaTypes.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Category",
     lowercase: true,
     required: true,
   },
-  brand: { type: SchemaTypes.ObjectId, ref: "Brand" },
-  features:[String],
+  brand: { type: Schema.Types.ObjectId, ref: "Brand" },
+  features: [String],
   price: { type: Number, required: true, max: 1000 },
   stock: { type: Number, required: true },
 });
