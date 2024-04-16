@@ -4,6 +4,7 @@
 
 - [Running App](#running-app)
 - [Node-TypeScript Setup](#node-typescript-setup)
+- [Database Models](#database-models)
 
 ## Running App
 
@@ -98,3 +99,7 @@ Now to run the app, enter command in the terminal:
 ```bash
 npm run dev
 ```
+
+## Database Models
+
+![UML Diagram](https://res.cloudinary.com/dptvznhc4/image/upload/v1713300607/music_inventory_r1mrlm.png)
