@@ -7,7 +7,13 @@ export interface ICategory {
 }
 
 const CategorySchema = new Schema<ICategory>({
-  name: { type: String, maxLength: 20, required: true, unique: true },
+  name: {
+    type: String,
+    maxLength: 20,
+    required: true,
+    unique: true,
+    lowercase: true,
+  },
   description: { type: String, required: true, minLength: 20 },
   cover_img: { type: String, required: true, unique: true },
 });
