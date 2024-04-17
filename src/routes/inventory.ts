@@ -1,14 +1,16 @@
 import { Router } from "express";
 
+import * as brandController from "../controllers/brand";
+
 const router = Router();
 
 // BRANDS
 
-router.get("/brands");
-router.post("/brands");
-router.get("/brands/:brandName");
-router.put("/brands/:brandName");
-router.delete("/brands/:brandName");
+router.get("/brands", brandController.index);
+router.post("/brands", brandController.addBrand);
+router.get("/brands/:brandName", brandController.getBrand);
+router.put("/brands/:brandName", brandController.editBrand);
+router.delete("/brands/:brandName", brandController.deleteBrand);
 
 // Categories
 
