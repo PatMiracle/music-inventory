@@ -35,19 +35,17 @@ export const addBrand = async (req: Request, res: Response) => {
 
 export const getBrand = async (req: Request, res: Response) => {
   const { brandName } = req.params;
-  if (brandName) {
-    const name = brandName.toLowerCase();
-    const brand = await Brand.find({ name: name });
 
-    if (Object.keys(brand).length) {
-      return res.status(200).json(brand);
-    } else {
-      return res
-        .status(404)
-        .json({ message: `Brand name ${brandName} does not exist` });
-    }
+  const name = brandName.toLowerCase();
+  const brand = await Brand.find({ name: name });
+
+  if (Object.keys(brand).length) {
+    return res.status(200).json(brand);
+  } else {
+    return res
+      .status(404)
+      .json({ message: `Brand name ${brandName} does not exist` });
   }
-  res.status(400).json({ message: "name field cannot be empty" });
 };
 
 export const editBrand = (req: Request, res: Response) => {};
