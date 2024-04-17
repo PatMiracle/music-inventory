@@ -12,7 +12,9 @@ export const addBrand = async (req: Request, res: Response) => {
   const { name, logo } = req.body;
   if (name) {
     // check if name already exists
-    const brandExists = await Brand.exists({ name: name.toLowercase() });
+    const brandName = name.toLowerCase();
+
+    const brandExists = await Brand.exists({ name: brandName });
 
     if (!brandExists) {
       const brandDetail: IBrand = { name };
@@ -26,7 +28,7 @@ export const addBrand = async (req: Request, res: Response) => {
 
     return res
       .status(409)
-      .json({ message: `Brand name ${name} already exists` });
+      .json({ message: `Brand name ${name.toLowerCase()} already exists` });
   }
   res.status(400).json({ message: "name field cannot be empty" });
 };
@@ -34,7 +36,8 @@ export const addBrand = async (req: Request, res: Response) => {
 export const getBrand = async (req: Request, res: Response) => {
   const { brandName } = req.params;
   if (brandName) {
-    const brand = await Brand.find({ name: brandName.toLowerCase() });
+    const name = brandName.toLowerCase();
+    const brand = await Brand.find({ name: name });
 
     if (Object.keys(brand).length) {
       return res.status(200).json(brand);
