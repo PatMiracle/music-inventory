@@ -45,6 +45,34 @@ export const getBrand = async (req: Request, res: Response) => {
   }
 };
 
-export const editBrand = async (req: Request, res: Response) => {};
+export const editBrand = async (req: Request, res: Response) => {
+  const { brandName } = req.params;
+  const { name, logo } = req.body;
+
+  if (!name && !logo) {
+    return res.status(400).json({ message: `no specified field to update` });
+  }
+
+  const brandExists = await Brand.exists({ name: brandName });
+
+  if (brandExists) {
+    const updateBrand: { name?: string; logo?: string } = {};
+
+    if (name) {
+      updateBrand.name = name;
+    }
+    if (logo) {
+      updateBrand.logo = logo;
+    }
+
+    await Brand.findOneAndUpdate({ name: brandName }, updateBrand)
+      .then(() => {
+        res.status(200).send({ message: "update success" });
+      })
+      .catch((e) => res.status(500).send({ message: "update unsuccessful" }));
+  } else {
+    res.status(404).json({ message: `Brand name ${brandName} does not exist` });
+  }
+};
 
 export const deleteBrand = async () => {};
