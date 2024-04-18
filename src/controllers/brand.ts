@@ -12,9 +12,7 @@ export const addBrand = async (req: Request, res: Response) => {
   const { name, logo } = req.body;
   if (name) {
     // check if name already exists
-    const brandName = name.toLowerCase();
-
-    const brandExists = await Brand.exists({ name: brandName });
+    const brandExists = await Brand.exists({ name: name });
 
     if (!brandExists) {
       const brandDetail: IBrand = { name };
@@ -36,8 +34,7 @@ export const addBrand = async (req: Request, res: Response) => {
 export const getBrand = async (req: Request, res: Response) => {
   const { brandName } = req.params;
 
-  const name = brandName.toLowerCase();
-  const brand = await Brand.find({ name: name });
+  const brand = await Brand.find({ name: brandName });
 
   if (Object.keys(brand).length) {
     return res.status(200).json(brand);
@@ -48,6 +45,6 @@ export const getBrand = async (req: Request, res: Response) => {
   }
 };
 
-export const editBrand = (req: Request, res: Response) => {};
+export const editBrand = async (req: Request, res: Response) => {};
 
-export const deleteBrand = () => {};
+export const deleteBrand = async () => {};
