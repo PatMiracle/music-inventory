@@ -1,5 +1,5 @@
 import Brand, { IBrand } from "../models/Brand";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 export const index = async (_req: Request, res: Response) => {
   const brands = await Brand.find({});
@@ -75,4 +75,14 @@ export const editBrand = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteBrand = async () => {};
+export const deleteBrand = async (req: Request, res: Response) => {
+  const { brandName } = req.params;
+
+  await Brand.deleteOne({ name: brandName })
+    .then(() => {
+      res.status(200).send({ message: "delete success" });
+    })
+    .catch((e) => {
+      res.status(500).send("there was an error");
+    });
+};
