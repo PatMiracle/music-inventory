@@ -62,7 +62,7 @@ export const editInstrument = async (req: Request, res: Response) => {
       img?: string;
       category?: string;
       brand?: string;
-      features?: string;
+      features?: string[];
       price?: number;
       stock?: number;
     } = {};
