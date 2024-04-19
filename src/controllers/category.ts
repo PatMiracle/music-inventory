@@ -1,4 +1,4 @@
-import Category, { ICategory } from "../models/Category";
+import Category from "../models/Category";
 import { Request, Response } from "express";
 
 export const index = async (_req: Request, res: Response) => {
@@ -26,7 +26,7 @@ export const addCategory = async (req: Request, res: Response) => {
 
     const category = new Category({ name, description, cover_img });
     await category.save();
-    return res.status(200).json({ message: `Added category: ${name}` });
+    return res.status(201).json({ message: `Added category: ${name}` });
   } else {
     res.status(409).json({ message: `Category name ${name} already exists` });
   }
@@ -75,7 +75,7 @@ export const editCategory = async (req: Request, res: Response) => {
 
     await Category.findOneAndUpdate({ name: categoryName }, updateCategory)
       .then(() => {
-        res.status(200).send({ message: "update success" });
+        res.status(201).send({ message: "update success" });
       })
       .catch((e) => res.status(500).send({ message: "update unsuccessful" }));
   } else {

@@ -21,7 +21,7 @@ export const addBrand = async (req: Request, res: Response) => {
       }
       const brand = new Brand(brandDetail);
       await brand.save();
-      return res.status(200).json({ message: `Added brand: ${name}` });
+      return res.status(201).json({ message: `Added brand: ${name}` });
     }
 
     return res
@@ -67,7 +67,7 @@ export const editBrand = async (req: Request, res: Response) => {
 
     await Brand.findOneAndUpdate({ name: brandName }, updateBrand)
       .then(() => {
-        res.status(200).send({ message: "update success" });
+        res.status(201).send({ message: "update success" });
       })
       .catch((e) => res.status(500).send({ message: "update unsuccessful" }));
   } else {
