@@ -1,6 +1,6 @@
 import Instrument, { InstrumentI } from "../models/Instrument";
 import { Request, Response } from "express";
-import mongoose from "mongoose";
+import { isValidObjectId } from "mongoose";
 
 export const index = async (_req: Request, res: Response) => {
   const instruments = await Instrument.find({});
@@ -41,8 +41,8 @@ export const addInstrument = async (req: Request, res: Response) => {
 export const getInstrument = async (req: Request, res: Response) => {
   const { instrumentID } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(instrumentID)) {
-    return res.status(400).json({ message: "invalid id" });
+  if (!isValidObjectId(instrumentID)) {
+    return res.status(400).json({ message: `id ${instrumentID} is invalid` });
   }
   const instrument = await Instrument.findById(instrumentID);
 
@@ -60,8 +60,8 @@ export const editInstrument = async (req: Request, res: Response) => {
   const { name, description, img, category, brand, features, price, stock } =
     req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(instrumentID)) {
-    return res.status(400).json({ message: "invalid id" });
+  if (!isValidObjectId(instrumentID)) {
+    return res.status(400).json({ message: `id ${instrumentID} is invalid` });
   }
 
   const instrumentExists = await Instrument.findById(instrumentID);
