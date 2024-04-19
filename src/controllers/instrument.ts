@@ -101,6 +101,11 @@ export const editInstrument = async (req: Request, res: Response) => {
 
 export const deleteInstrument = async (req: Request, res: Response) => {
   const { instrumentID } = req.params;
+
+  if (!isValidObjectId(instrumentID)) {
+    return res.status(400).json({ message: `id ${instrumentID} is invalid` });
+  }
+
   await Instrument.findByIdAndDelete(instrumentID)
     .then(() => {
       res.status(200).send({ message: "delete success" });
