@@ -40,7 +40,7 @@ export const addInstrument = async (req: Request, res: Response) => {
 export const getInstrument = async (req: Request, res: Response) => {
   const { instrumentID } = req.params;
 
-  const instrument = await Instrument.find({ _id: instrumentID });
+  const instrument = await Instrument.findById(instrumentID);
 
   if (Object.keys(instrument).length) {
     return res.status(200).json(instrument);
@@ -56,7 +56,7 @@ export const editInstrument = async (req: Request, res: Response) => {
   const { name, description, img, category, brand, features, price, stock } =
     req.body;
 
-  const instrumentExists = await Instrument.find({ _id: instrumentID });
+  const instrumentExists = await Instrument.findById(instrumentID);
 
   if (instrumentExists) {
     const updateInstrument: {
