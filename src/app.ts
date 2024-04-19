@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 
 import express, { Request, Response, NextFunction } from "express";
 import morgan from "morgan";
-import createError from "http-errors";
 
 import connectDb from "./db/connect";
 
@@ -25,23 +24,8 @@ app.use(express.json());
 
 app.use("/inventory", inventoryRoute);
 
-// catch 404 and forward to error handler
-app.use(function (_req: Request, _res: Response, next: NextFunction) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (
-  err: { message: string; status: number },
-  req: Request,
-  res: Response
-) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500).send("error");
+app.all("*", (_req: Request, res: Response) => {
+  res.status(404).send(`cannot find ${_req.url}`);
 });
 
 async function main() {
