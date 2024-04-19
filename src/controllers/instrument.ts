@@ -87,7 +87,7 @@ export const editInstrument = async (req: Request, res: Response) => {
     if (price) updateInstrument.price = price;
     if (stock || stock === 0) updateInstrument.stock = stock;
 
-    await Instrument.findByIdAndDelete(instrumentID, updateInstrument)
+    await Instrument.findByIdAndUpdate(instrumentID, updateInstrument)
       .then(() => {
         res.status(201).send({ message: "update success" });
       })
