@@ -19,7 +19,7 @@ export const addCategory = async (req: Request, res: Response) => {
 
   const categoryExists = await Category.exists({ name: name });
 
-  if (categoryExists) {
+  if (!categoryExists) {
     const category = new Category({ name, description, cover_img });
     await category.save();
     return res.status(200).json({ message: `Added category: ${name}` });
