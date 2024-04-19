@@ -31,6 +31,9 @@ export const addInstrument = async (req: Request, res: Response) => {
   if (brand) instrumentDetail.brand = brand;
   if (features) instrumentDetail.features = features;
 
+  const instrument = new Instrument(instrumentDetail);
+  await instrument.save();
+
   return res.status(201).json({ message: `Added instrument: ${name}` });
 };
 
