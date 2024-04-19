@@ -20,6 +20,10 @@ export const addCategory = async (req: Request, res: Response) => {
   const categoryExists = await Category.exists({ name: name });
 
   if (!categoryExists) {
+    if (description.length < 20) {
+      return res.status(400).send({ message: `description too short` });
+    }
+
     const category = new Category({ name, description, cover_img });
     await category.save();
     return res.status(200).json({ message: `Added category: ${name}` });
