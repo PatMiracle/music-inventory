@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import * as brandController from "../controllers/brand";
 import * as categoryController from "../controllers/category";
+import * as instrumentController from "../controllers/instrument";
 
 const router = Router();
 
@@ -23,11 +24,14 @@ router.delete("/categories/:categoryName", categoryController.deleteCategory);
 
 // Instruments
 
-router.get("/instruments");
-router.post("/instruments");
-router.get("/instruments/:instrumentID");
-router.put("/instruments/:instrumentID");
-router.delete("/instruments/:instrumentID");
+router.get("/instruments", instrumentController.index);
+router.post("/instruments", instrumentController.addInstrument);
+router.get("/instruments/:instrumentID", instrumentController.getInstrument);
+router.put("/instruments/:instrumentID", instrumentController.editInstrument);
+router.delete(
+  "/instruments/:instrumentID",
+  instrumentController.deleteInstrument
+);
 
 // Accessories
 
