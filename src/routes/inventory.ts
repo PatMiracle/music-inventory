@@ -3,6 +3,7 @@ import { Router } from "express";
 import * as brandController from "../controllers/brand";
 import * as categoryController from "../controllers/category";
 import * as instrumentController from "../controllers/instrument";
+import * as accessoryController from "../controllers/accessory";
 
 const router = Router();
 
@@ -35,10 +36,10 @@ router.delete(
 
 // Accessories
 
-router.get("/accessories");
-router.post("/accessories");
-router.get("/accessories/:accessID");
-router.put("/accessories/:accessID");
-router.delete("/accessories/:accessID");
+router.get("/accessories", accessoryController.index);
+router.post("/accessories", accessoryController.addAccessory);
+router.get("/accessories/:accessID", accessoryController.getAccessory);
+router.put("/accessories/:accessID", accessoryController.editAccessory);
+router.delete("/accessories/:accessID", accessoryController.deleteAccessory);
 
 export default router;
