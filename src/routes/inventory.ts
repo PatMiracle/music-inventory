@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import * as brandController from "../controllers/brand";
+import * as categoryController from "../controllers/category";
 
 const router = Router();
 
@@ -14,11 +15,11 @@ router.delete("/brands/:brandName", brandController.deleteBrand);
 
 // Categories
 
-router.get("/categories");
-router.post("/categories");
-router.get("/categories/:categoryName");
-router.put("/categories/:categoryName");
-router.delete("/categories/:categoryName");
+router.get("/categories", categoryController.index);
+router.post("/categories", categoryController.addCategory);
+router.get("/categories/:categoryName", categoryController.getCategory);
+router.put("/categories/:categoryName", categoryController.editCategory);
+router.delete("/categories/:categoryName", categoryController.deleteCategory);
 
 // Instruments
 
