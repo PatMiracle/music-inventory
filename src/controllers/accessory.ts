@@ -1,6 +1,7 @@
 import { isValidObjectId } from "mongoose";
 import Accessory, { AccessoryI } from "../models/Accessory";
 import { Request, Response } from "express";
+import { body, validationResult } from "express-validator";
 
 export const index = async (_req: Request, res: Response) => {
   const accessories = await Accessory.find({});
@@ -9,39 +10,51 @@ export const index = async (_req: Request, res: Response) => {
   } else res.status(404).json({ message: "no accessories created" });
 };
 
-export const addAccessory = async (req: Request, res: Response) => {
-  const {
-    name,
-    description,
-    img,
-    related_instruments,
-    brand,
-    features,
-    price,
-    stock,
-  } = req.body;
+export const addAccessory = [
+  body("name").trim().notEmpty().withMessage("name field cannot be empty"),
+  body("img").notEmpty().withMessage("img field cannot be empty"),
+  body("price").custom((value) => {
+    if (!value) throw new Error("price field cannot be empty");
+    if (!Number(value)) throw new Error("price value must be a number");
+    if (value > 1000) throw new Error("price value cannot exceed 1000");
+  }),
+  body("stock").custom((value) => {
+    if (!value) throw new Error("stock field cannot be empty");
+    if (!Number(value)) throw new Error("stock value  must be a number");
+  }),
+  async (req: Request, res: Response) => {
+    const {
+      name,
+      description,
+      img,
+      related_instruments,
+      brand,
+      features,
+      price,
+      stock,
+    } = req.body;
+    const error = validationResult(req);
 
-  if (!name || !img || !price || !stock) {
-    return res.status(400).json({
-      message: "fields: name, img, price and stock must not be empty",
-    });
-  }
+    if (error.isEmpty()) {
+      if (price > 1000) {
+        return res
+          .status(400)
+          .json({ message: "price should be less than or 1000" });
+      }
+      const accessoryDetail: AccessoryI = { name, img, price, stock };
 
-  if (price > 1000) {
-    return res
-      .status(400)
-      .json({ message: "price should be less than or 1000" });
-  }
-  const accessoryDetail: AccessoryI = { name, img, price, stock };
+      if (description) accessoryDetail.description = description;
+      if (related_instruments)
+        accessoryDetail.related_instruments = related_instruments;
+      if (brand) accessoryDetail.brand = brand;
+      if (features) accessoryDetail.features = features;
 
-  if (description) accessoryDetail.description = description;
-  if (related_instruments)
-    accessoryDetail.related_instruments = related_instruments;
-  if (brand) accessoryDetail.brand = brand;
-  if (features) accessoryDetail.features = features;
-
-  return res.status(201).json({ message: `Added accessory: ${name}` });
-};
+      return res.status(201).json({ message: `Added accessory: ${name}` });
+    }
+    const formatErr = error.array().map(({ msg }) => msg);
+    return res.status(400).json({ message: formatErr });
+  },
+];
 
 export const getAccessory = async (req: Request, res: Response) => {
   const { accessID } = req.params;

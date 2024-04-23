@@ -1,6 +1,7 @@
 import Instrument, { InstrumentI } from "../models/Instrument";
 import { Request, Response } from "express";
 import { isValidObjectId } from "mongoose";
+import { body, validationResult } from "express-validator";
 
 export const index = async (_req: Request, res: Response) => {
   const instruments = await Instrument.find({});
@@ -9,34 +10,48 @@ export const index = async (_req: Request, res: Response) => {
   } else res.status(404).json({ message: "no instrument created" });
 };
 
-export const addInstrument = async (req: Request, res: Response) => {
-  const { name, description, img, category, brand, features, price, stock } =
-    req.body;
+export const addInstrument = [
+  body("name").trim().notEmpty().withMessage("name field cannot be empty"),
+  body("img").notEmpty().withMessage("img field cannot be empty"),
+  body("category").notEmpty().withMessage("category field cannot be empty"),
+  body("price").custom((value) => {
+    if (!value) throw new Error("price field cannot be empty");
+    if (!Number(value)) throw new Error("price value must be a number");
+    if (value > 1000) throw new Error("price value cannot exceed 1000");
+  }),
+  body("stock").custom((value) => {
+    if (!value) throw new Error("stock field cannot be empty");
+    if (!Number(value)) throw new Error("stock value  must be a number");
+  }),
+  async (req: Request, res: Response) => {
+    const { name, description, img, category, brand, features, price, stock } =
+      req.body;
 
-  if (!name || !img || !category || !price || !stock) {
-    return res.status(400).json({
-      message:
-        "fields: name, img, category, price and stock should not be empty",
-    });
-  }
+    const error = validationResult(req);
 
-  if (price > 1000) {
-    return res
-      .status(400)
-      .json({ message: "price should be less than or 1000" });
-  }
+    if (!error.isEmpty()) {
+      const formatErr = error.array().map(({ msg }) => msg);
+      return res.status(400).json({ message: formatErr });
+    }
 
-  const instrumentDetail: InstrumentI = { name, img, category, price, stock };
+    if (price > 1000) {
+      return res
+        .status(400)
+        .json({ message: "price should be less than or 1000" });
+    }
 
-  if (description) instrumentDetail.description = description;
-  if (brand) instrumentDetail.brand = brand;
-  if (features) instrumentDetail.features = features;
+    const instrumentDetail: InstrumentI = { name, img, category, price, stock };
 
-  const instrument = new Instrument(instrumentDetail);
-  await instrument.save();
+    if (description) instrumentDetail.description = description;
+    if (brand) instrumentDetail.brand = brand;
+    if (features) instrumentDetail.features = features;
 
-  return res.status(201).json({ message: `Added instrument: ${name}` });
-};
+    const instrument = new Instrument(instrumentDetail);
+    await instrument.save();
+
+    return res.status(201).json({ message: `Added instrument: ${name}` });
+  },
+];
 
 export const getInstrument = async (req: Request, res: Response) => {
   const { instrumentID } = req.params;
