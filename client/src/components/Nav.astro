@@ -1,11 +1,9 @@
 ---
 import { TfiShoppingCart } from "react-icons/tfi";
+import { fetchItems } from "../scripts/utils";
 
-const res = await fetch("http://localhost:3000/inventory/categories");
-const data = await res.json();
-const categories: string[] | [] = data.map(
-  ({ name }: { name: string }) => name
-);
+const data = await fetchItems("/categories");
+const categories = data.map(({ name }) => name);
 ---
 
 <nav>
