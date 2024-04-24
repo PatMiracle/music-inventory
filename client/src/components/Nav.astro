@@ -1,0 +1,39 @@
+---
+import { TfiShoppingCart } from "react-icons/tfi";
+
+const res = await fetch("http://localhost:3000/inventory/categories");
+const data = await res.json();
+const categories: string[] | [] = data.map(
+  ({ name }: { name: string }) => name
+);
+---
+
+<nav>
+  <div class="center py-[3vh] flex justify-between items-center">
+    <a href="/" class="text-2xl">Music Inventory</a>
+    <ul class="flex gap-10">
+      {
+        categories.length &&
+          categories.map((name) => {
+            return (
+              <li>
+                <a href={`/categories/${name}`} class="capitalize">
+                  {name}
+                </a>
+              </li>
+            );
+          })
+      }
+    </ul>
+    <div class="flex gap-3">
+      <input
+        type="text"
+        placeholder="search..."
+        class="outline-none text-black px-2"
+      />
+      <button>
+        <TfiShoppingCart size={24} />
+      </button>
+    </div>
+  </div>
+</nav>
