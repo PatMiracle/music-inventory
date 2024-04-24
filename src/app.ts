@@ -8,6 +8,8 @@ import connectDb from "./db/connect";
 import inventoryRoute from "./routes/inventory";
 import compression from "compression";
 
+import cors from "cors";
+
 // Populate DB
 // import populate from "./db/populate";
 // populate().catch((e) => console.log(e));
@@ -21,6 +23,8 @@ app.use(morgan("dev"));
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(cors());
 
 app.use("/inventory", inventoryRoute);
 
