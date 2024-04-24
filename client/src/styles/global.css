@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+* {
+  font-family: "Roboto Condensed Variable", sans-serif;
+}
+.center {
+  @apply w-11/12 max-w-7xl mx-auto;
+}
