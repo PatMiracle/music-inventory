@@ -8,3 +8,7 @@
 .center {
   @apply w-11/12 max-w-7xl mx-auto;
 }
+:is(h1, h2, h3, h4, h5, h6) {
+  @apply font-bold;
+  letter-spacing: 2px;
+}
