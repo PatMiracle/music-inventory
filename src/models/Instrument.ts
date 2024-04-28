@@ -5,7 +5,7 @@ import { IBrand } from "./Brand";
 export interface InstrumentI {
   name: string;
   description?: string;
-  img: string;
+  img: string[];
   category: Types.ObjectId | ICategory;
   brand?: Types.ObjectId | IBrand;
   features?: string[];
@@ -16,7 +16,7 @@ export interface InstrumentI {
 const InstrumentSchema = new Schema<InstrumentI>({
   name: { type: String, required: true },
   description: { type: String },
-  img: { type: String, required: true },
+  img: [{ type: String, required: true }],
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",

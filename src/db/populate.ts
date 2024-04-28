@@ -112,11 +112,9 @@ async function createBrands() {
     }),
     brandCreate(2, {
       name: "Fender",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnkNE1WB9lnd_pn07AUiAAwlx4w5qZxbWRcTsqQuMd8g&s",
     }),
     brandCreate(3, {
       name: "Roland",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOh0vEZlDjsHJAoOf_2YfXSr3au7s-KUhWJ2iotA_A&s",
     }),
     brandCreate(4, {
       name: "Selmer",
@@ -158,7 +156,9 @@ async function createInstruments() {
     instrumentCreate(0, {
       name: "Grace VanderWaal Moonlight Ukulele",
       description: `Inspired by the soprano ukulele that accompanied Grace VanderWaal as she learned to play, the Grace VanderWaal Moonlight Soprano Ukulele is a marvelous introduction to this easy-to-play instrument. With its comfortable smaller body, enticing sound and stage-ready features, the Grace VanderWaal Moonlight Soprano Ukulele is the perfect partner for her music. Reflecting Grace's "Boho Chic" style, this ukulele features an elegant, stylish Navy Blue satin finish, gold sparkle rosette, gold hardware, custom floral soundhole label inspired by the album art from her debut release, Just The Beginning, and Grace's distinctive heart signature adorning the back of the headstock.`,
-      img: "https://www.fmicassets.com/Damroot/LgJpg/10001/0971610102_gtr_frtangle_001_rr.jpg",
+      img: [
+        "https://www.fmicassets.com/Damroot/LgJpg/10001/0971610102_gtr_frtangle_001_rr.jpg",
+      ],
       category: categories[0],
       brand: brands[2],
       price: 50,
@@ -167,7 +167,9 @@ async function createInstruments() {
     instrumentCreate(2, {
       name: "Drum Kit: TD-50KV2 V-Drums",
       description: `The flagship TD-50KV2 represents the pinnacle of V-Drums innovation, delivering the most complete electronic drumming experience available anywhere. Large, top-of-the-line pads and cymbals are featured throughout, including groundbreaking digital snare, ride, and hi-hat pads that bring ultra-detailed playability to the three most nuanced pieces in the kit. The next-generation TD-50X module provides unmatched tone, feel, and response, coupled with deep editing tools to fully personalize your sound and pro connectivity to take on any playing situation. If you’re looking for the ultimate in V-Drums performance, look no further than the TD-50KV2.`,
-      img: "https://static.roland.com/products/td-50kv2/images/td-50kv2_main.jpg",
+      img: [
+        "https://static.roland.com/products/td-50kv2/images/td-50kv2_main.jpg",
+      ],
       category: categories[2],
       brand: brands[3],
       price: 1000,
@@ -175,7 +177,9 @@ async function createInstruments() {
     }),
     instrumentCreate(3, {
       name: "Piano",
-      img: "https://images.pexels.com/photos/164743/pexels-photo-164743.jpeg?auto=compress&cs=tinysrgb&w=600",
+      img: [
+        "https://images.pexels.com/photos/164743/pexels-photo-164743.jpeg?auto=compress&cs=tinysrgb&w=600",
+      ],
       category: categories[2],
       brand: brands[1],
       price: 200,
@@ -183,7 +187,9 @@ async function createInstruments() {
     }),
     instrumentCreate(4, {
       name: "Clarinet",
-      img: "https://images.unsplash.com/photo-1569791832138-fbdd9a500384?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xhcmluZXR8ZW58MHx8MHx8fDA%3D",
+      img: [
+        "https://images.unsplash.com/photo-1569791832138-fbdd9a500384?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2xhcmluZXR8ZW58MHx8MHx8fDA%3D",
+      ],
       category: categories[1],
       brand: brands[4],
       price: 400,
@@ -199,7 +205,9 @@ async function createAccessories() {
       name: "Music Stand",
       description:
         "A stand that holds your sheet music in place so you can read it easily while you play.",
-      img: "https://images.unsplash.com/photo-1613142659418-718b2ae6940d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjBzdGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+      img: [
+        "https://images.unsplash.com/photo-1613142659418-718b2ae6940d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWMlMjBzdGFuZHxlbnwwfHwwfHx8MA%3D%3D",
+      ],
       price: 10,
       stock: 50,
       related_instruments: [instruments[3], instruments[4]],
@@ -208,7 +216,9 @@ async function createAccessories() {
       name: "Reeds",
       description:
         "Thin pieces of cane or synthetic material that vibrate to produce sound in a single-reed instrument. Reeds need to be replaced regularly as they become worn.",
-      img: "https://media.istockphoto.com/id/1310484587/photo/saxophone-or-clarinet-mouthpiece-with-replacement-reeds-and-gold-clamp.webp?b=1&s=170667a&w=0&k=20&c=6dLQDV_w9STdI-Rx2PQuIuyeTfx8o03TfVxgYhuXZ1E=",
+      img: [
+        "https://media.istockphoto.com/id/1310484587/photo/saxophone-or-clarinet-mouthpiece-with-replacement-reeds-and-gold-clamp.webp?b=1&s=170667a&w=0&k=20&c=6dLQDV_w9STdI-Rx2PQuIuyeTfx8o03TfVxgYhuXZ1E=",
+      ],
       related_instruments: [instruments[4]],
       price: 10,
       stock: 100,
